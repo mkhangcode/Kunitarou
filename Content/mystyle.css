@@ -1,0 +1,60 @@
+﻿body {
+    margin: 0;
+}
+
+#div-top {
+    height: 80px;
+    background-color: black;
+    background-image: url(https://bizweb.dktcdn.net/100/384/579/themes/839203/assets/main_bg.jpg?1662712768316);
+    border-bottom: 3px solid #FFFF66;
+}
+
+#div-body {
+    width: 100%;
+    background-color: black;
+    background-image: url(https://bizweb.dktcdn.net/100/384/579/themes/839203/assets/main_bg.jpg?1662712768316);
+}
+
+#div-footer {
+    height: 50px;
+    background-color: red;
+    bottom: 0px;
+    text-align: center;
+    left: 50%;
+    padding-top: 25px;
+    background-image: url(https://bizweb.dktcdn.net/100/384/579/themes/839203/assets/main_bg.jpg?1662712768316);
+
+}
+.menu {
+    margin-top:30px;
+    display: flex;
+    float: right;
+    color: yellow;
+    right:10%;
+    margin-right:10px;
+}
+#div-main{
+    display:flex;
+    flex-direction:row;
+}
+#div-left {
+    width: 25%;
+    height: auto;
+    font-family: Arial;
+    font-size: 20px;
+    background-color: aqua;
+    float: left;
+    background-image: url(https://bizweb.dktcdn.net/100/384/579/themes/839203/assets/main_bg.jpg?1662712768316);
+}
+
+#div-left h3 {
+        text-align: center;
+    }
+
+#div-right {
+    float: right;
+    width: 75%;
+    height: auto;
+    background-color: antiquewhite;
+    background-image: url(https://bizweb.dktcdn.net/100/384/579/themes/839203/assets/main_bg.jpg?1662712768316);
+}
