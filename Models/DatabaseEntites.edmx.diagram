@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1000f124847d4e0fa519decb88450b8b" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.Table_chủ_đề" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Table_đơn_đặt_hàng" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Table_khách_hàng" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Table_mô_hình" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Table_nhà_sản_xuất" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Table_kiểm_soát_đặt_hàng" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK_Table_chủ_đề_Table_chủ_đề" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Table_mô_hình_Table_chủ_đề" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Table_đơn_đặt_hàng_Table_khách_hàng" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Table_kiểm_soát_đặt_hàng_Table_đơn_đặt_hàng" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Table_kiểm_soát_đặt_hàng_Table_mô_hình" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Table_mô_hình_Table_nhà_sản_xuất" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

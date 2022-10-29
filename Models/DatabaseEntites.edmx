@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Table chủ đề">
+          <Key>
+            <PropertyRef Name="Mã chủ đề" />
+          </Key>
+          <Property Name="Mã chủ đề" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tên chủ đề (tên phim,...)" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bộ sưu tập" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Table đơn đặt hàng">
+          <Key>
+            <PropertyRef Name="Mã đơn hàng" />
+          </Key>
+          <Property Name="Mã đơn hàng" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mã khách hàng" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ngày đặt hàng" Type="date" />
+          <Property Name="Trị giá" Type="int" />
+          <Property Name="Đã giao" Type="nvarchar" MaxLength="10" />
+          <Property Name="Ngày giao hàng" Type="date" />
+          <Property Name="Tên người nhận" Type="nvarchar" MaxLength="50" />
+          <Property Name="Địa chỉ nhận" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sđt nhận" Type="char" MaxLength="11" />
+          <Property Name="Hình thức thanh toán" Type="nvarchar" MaxLength="30" />
+          <Property Name="Hình thức giao hàng" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Table khách hàng">
+          <Key>
+            <PropertyRef Name="Mã khách hàng" />
+          </Key>
+          <Property Name="Mã khách hàng" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tên khách hàng" Type="nvarchar" MaxLength="50" />
+          <Property Name="Địa chỉ khách hàng" Type="nvarchar" MaxLength="50" />
+          <Property Name="Điện thoại khách hàng" Type="char" MaxLength="11" />
+          <Property Name="Tên đăng nhập" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mật khẩu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ngày sinh" Type="date" />
+          <Property Name="Giới tính" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Đã duyệt" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Database web mô hình.dbo.Table kiểm soát đặt hàng' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Table kiểm soát đặt hàng">
+          <Key>
+            <PropertyRef Name="Mã đơn hàng" />
+          </Key>
+          <Property Name="Mã đơn hàng" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mã mô hình" Type="nvarchar" MaxLength="20" />
+          <Property Name="Số lượng" Type="int" />
+          <Property Name="Đơn giá" Type="int" />
+          <Property Name="Thành tiền" Type="int" />
+        </EntityType>
+        <EntityType Name="Table mô hình">
+          <Key>
+            <PropertyRef Name="Mã mô hình" />
+          </Key>
+          <Property Name="Mã mô hình" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tên mô hình" Type="nvarchar" MaxLength="20" />
+          <Property Name="Đơn vị tính" Type="nvarchar" MaxLength="10" />
+          <Property Name="Đơn giá" Type="nvarchar" MaxLength="20" />
+          <Property Name="Hình minh họa" Type="varbinary(max)" />
+          <Property Name="Mô tả" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mã chủ đề" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mã nhà sản xuất" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ngày cập nhật" Type="date" />
+          <Property Name="Số lượng bán" Type="int" />
+          <Property Name="Số lượt xem" Type="int" />
+        </EntityType>
+        <EntityType Name="Table nhà sản xuất">
+          <Key>
+            <PropertyRef Name="Mã nhà sản xuất" />
+          </Key>
+          <Property Name="Mã nhà sản xuất" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tên nhà sản xuất" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Table chủ đề_Table chủ đề">
+          <End Role="Table chủ đề" Type="Self.Table chủ đề" Multiplicity="1" />
+          <End Role="Table chủ đề1" Type="Self.Table chủ đề" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Table chủ đề">
+              <PropertyRef Name="Mã chủ đề" />
+            </Principal>
+            <Dependent Role="Table chủ đề1">
+              <PropertyRef Name="Mã chủ đề" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table đơn đặt hàng_Table khách hàng">
+          <End Role="Table khách hàng" Type="Self.Table khách hàng" Multiplicity="0..1" />
+          <End Role="Table đơn đặt hàng" Type="Self.Table đơn đặt hàng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table khách hàng">
+              <PropertyRef Name="Mã khách hàng" />
+            </Principal>
+            <Dependent Role="Table đơn đặt hàng">
+              <PropertyRef Name="Mã khách hàng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table kiểm soát đặt hàng_Table đơn đặt hàng">
+          <End Role="Table đơn đặt hàng" Type="Self.Table đơn đặt hàng" Multiplicity="1" />
+          <End Role="Table kiểm soát đặt hàng" Type="Self.Table kiểm soát đặt hàng" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Table đơn đặt hàng">
+              <PropertyRef Name="Mã đơn hàng" />
+            </Principal>
+            <Dependent Role="Table kiểm soát đặt hàng">
+              <PropertyRef Name="Mã đơn hàng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table kiểm soát đặt hàng_Table mô hình">
+          <End Role="Table mô hình" Type="Self.Table mô hình" Multiplicity="0..1" />
+          <End Role="Table kiểm soát đặt hàng" Type="Self.Table kiểm soát đặt hàng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table mô hình">
+              <PropertyRef Name="Mã mô hình" />
+            </Principal>
+            <Dependent Role="Table kiểm soát đặt hàng">
+              <PropertyRef Name="Mã mô hình" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table mô hình_Table chủ đề">
+          <End Role="Table chủ đề" Type="Self.Table chủ đề" Multiplicity="0..1" />
+          <End Role="Table mô hình" Type="Self.Table mô hình" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table chủ đề">
+              <PropertyRef Name="Mã chủ đề" />
+            </Principal>
+            <Dependent Role="Table mô hình">
+              <PropertyRef Name="Mã chủ đề" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table mô hình_Table nhà sản xuất">
+          <End Role="Table nhà sản xuất" Type="Self.Table nhà sản xuất" Multiplicity="0..1" />
+          <End Role="Table mô hình" Type="Self.Table mô hình" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table nhà sản xuất">
+              <PropertyRef Name="Mã nhà sản xuất" />
+            </Principal>
+            <Dependent Role="Table mô hình">
+              <PropertyRef Name="Mã nhà sản xuất" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Table chủ đề" EntityType="Self.Table chủ đề" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table đơn đặt hàng" EntityType="Self.Table đơn đặt hàng" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table khách hàng" EntityType="Self.Table khách hàng" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table mô hình" EntityType="Self.Table mô hình" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table nhà sản xuất" EntityType="Self.Table nhà sản xuất" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table kiểm soát đặt hàng" EntityType="Self.Table kiểm soát đặt hàng" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Table kiểm soát đặt hàng].[Mã đơn hàng] AS [Mã đơn hàng], 
+    [Table kiểm soát đặt hàng].[Mã mô hình] AS [Mã mô hình], 
+    [Table kiểm soát đặt hàng].[Số lượng] AS [Số lượng], 
+    [Table kiểm soát đặt hàng].[Đơn giá] AS [Đơn giá], 
+    [Table kiểm soát đặt hàng].[Thành tiền] AS [Thành tiền]
+    FROM [dbo].[Table kiểm soát đặt hàng] AS [Table kiểm soát đặt hàng]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Table chủ đề_Table chủ đề" Association="Self.FK_Table chủ đề_Table chủ đề">
+            <End Role="Table chủ đề" EntitySet="Table chủ đề" />
+            <End Role="Table chủ đề1" EntitySet="Table chủ đề" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table đơn đặt hàng_Table khách hàng" Association="Self.FK_Table đơn đặt hàng_Table khách hàng">
+            <End Role="Table khách hàng" EntitySet="Table khách hàng" />
+            <End Role="Table đơn đặt hàng" EntitySet="Table đơn đặt hàng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table kiểm soát đặt hàng_Table đơn đặt hàng" Association="Self.FK_Table kiểm soát đặt hàng_Table đơn đặt hàng">
+            <End Role="Table đơn đặt hàng" EntitySet="Table đơn đặt hàng" />
+            <End Role="Table kiểm soát đặt hàng" EntitySet="Table kiểm soát đặt hàng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table kiểm soát đặt hàng_Table mô hình" Association="Self.FK_Table kiểm soát đặt hàng_Table mô hình">
+            <End Role="Table mô hình" EntitySet="Table mô hình" />
+            <End Role="Table kiểm soát đặt hàng" EntitySet="Table kiểm soát đặt hàng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table mô hình_Table chủ đề" Association="Self.FK_Table mô hình_Table chủ đề">
+            <End Role="Table chủ đề" EntitySet="Table chủ đề" />
+            <End Role="Table mô hình" EntitySet="Table mô hình" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table mô hình_Table nhà sản xuất" Association="Self.FK_Table mô hình_Table nhà sản xuất">
+            <End Role="Table nhà sản xuất" EntitySet="Table nhà sản xuất" />
+            <End Role="Table mô hình" EntitySet="Table mô hình" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Table_chủ_đề">
+          <Key>
+            <PropertyRef Name="Mã_chủ_đề" />
+          </Key>
+          <Property Name="Mã_chủ_đề" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tên_chủ_đề__tên_phim_____" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bộ_sưu_tập" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Table_chủ_đề1" Relationship="Self.FK_Table_chủ_đề_Table_chủ_đề" FromRole="Table_chủ_đề" ToRole="Table_chủ_đề1" />
+          <NavigationProperty Name="Table_chủ_đề2" Relationship="Self.FK_Table_chủ_đề_Table_chủ_đề" FromRole="Table_chủ_đề1" ToRole="Table_chủ_đề" />
+          <NavigationProperty Name="Table_mô_hình" Relationship="Self.FK_Table_mô_hình_Table_chủ_đề" FromRole="Table_chủ_đề" ToRole="Table_mô_hình" />
+        </EntityType>
+        <EntityType Name="Table_đơn_đặt_hàng">
+          <Key>
+            <PropertyRef Name="Mã_đơn_hàng" />
+          </Key>
+          <Property Name="Mã_đơn_hàng" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mã_khách_hàng" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ngày_đặt_hàng" Type="DateTime" Precision="0" />
+          <Property Name="Trị_giá" Type="Int32" />
+          <Property Name="Đã_giao" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Ngày_giao_hàng" Type="DateTime" Precision="0" />
+          <Property Name="Tên_người_nhận" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Địa_chỉ_nhận" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sđt_nhận" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Hình_thức_thanh_toán" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Hình_thức_giao_hàng" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_khách_hàng" Relationship="Self.FK_Table_đơn_đặt_hàng_Table_khách_hàng" FromRole="Table_đơn_đặt_hàng" ToRole="Table_khách_hàng" />
+          <NavigationProperty Name="Table_kiểm_soát_đặt_hàng" Relationship="Self.FK_Table_kiểm_soát_đặt_hàng_Table_đơn_đặt_hàng" FromRole="Table_đơn_đặt_hàng" ToRole="Table_kiểm_soát_đặt_hàng" />
+        </EntityType>
+        <EntityType Name="Table_khách_hàng">
+          <Key>
+            <PropertyRef Name="Mã_khách_hàng" />
+          </Key>
+          <Property Name="Mã_khách_hàng" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tên_khách_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Địa_chỉ_khách_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Điện_thoại_khách_hàng" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Tên_đăng_nhập" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mật_khẩu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ngày_sinh" Type="DateTime" Precision="0" />
+          <Property Name="Giới_tính" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Đã_duyệt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_đơn_đặt_hàng" Relationship="Self.FK_Table_đơn_đặt_hàng_Table_khách_hàng" FromRole="Table_khách_hàng" ToRole="Table_đơn_đặt_hàng" />
+        </EntityType>
+        <EntityType Name="Table_mô_hình">
+          <Key>
+            <PropertyRef Name="Mã_mô_hình" />
+          </Key>
+          <Property Name="Mã_mô_hình" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tên_mô_hình" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Đơn_vị_tính" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Đơn_giá" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Hình_minh_họa" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Mô_tả" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mã_chủ_đề" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Mã_nhà_sản_xuất" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ngày_cập_nhật" Type="DateTime" Precision="0" />
+          <Property Name="Số_lượng_bán" Type="Int32" />
+          <Property Name="Số_lượt_xem" Type="Int32" />
+          <NavigationProperty Name="Table_chủ_đề" Relationship="Self.FK_Table_mô_hình_Table_chủ_đề" FromRole="Table_mô_hình" ToRole="Table_chủ_đề" />
+          <NavigationProperty Name="Table_kiểm_soát_đặt_hàng" Relationship="Self.FK_Table_kiểm_soát_đặt_hàng_Table_mô_hình" FromRole="Table_mô_hình" ToRole="Table_kiểm_soát_đặt_hàng" />
+          <NavigationProperty Name="Table_nhà_sản_xuất" Relationship="Self.FK_Table_mô_hình_Table_nhà_sản_xuất" FromRole="Table_mô_hình" ToRole="Table_nhà_sản_xuất" />
+        </EntityType>
+        <EntityType Name="Table_nhà_sản_xuất">
+          <Key>
+            <PropertyRef Name="Mã_nhà_sản_xuất" />
+          </Key>
+          <Property Name="Mã_nhà_sản_xuất" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tên_nhà_sản_xuất" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table_mô_hình" Relationship="Self.FK_Table_mô_hình_Table_nhà_sản_xuất" FromRole="Table_nhà_sản_xuất" ToRole="Table_mô_hình" />
+        </EntityType>
+        <EntityType Name="Table_kiểm_soát_đặt_hàng">
+          <Key>
+            <PropertyRef Name="Mã_đơn_hàng" />
+          </Key>
+          <Property Name="Mã_đơn_hàng" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mã_mô_hình" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Số_lượng" Type="Int32" />
+          <Property Name="Đơn_giá" Type="Int32" />
+          <Property Name="Thành_tiền" Type="Int32" />
+          <NavigationProperty Name="Table_đơn_đặt_hàng" Relationship="Self.FK_Table_kiểm_soát_đặt_hàng_Table_đơn_đặt_hàng" FromRole="Table_kiểm_soát_đặt_hàng" ToRole="Table_đơn_đặt_hàng" />
+          <NavigationProperty Name="Table_mô_hình" Relationship="Self.FK_Table_kiểm_soát_đặt_hàng_Table_mô_hình" FromRole="Table_kiểm_soát_đặt_hàng" ToRole="Table_mô_hình" />
+        </EntityType>
+        <Association Name="FK_Table_chủ_đề_Table_chủ_đề">
+          <End Role="Table_chủ_đề" Type="Self.Table_chủ_đề" Multiplicity="1" />
+          <End Role="Table_chủ_đề1" Type="Self.Table_chủ_đề" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Table_chủ_đề">
+              <PropertyRef Name="Mã_chủ_đề" />
+            </Principal>
+            <Dependent Role="Table_chủ_đề1">
+              <PropertyRef Name="Mã_chủ_đề" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_mô_hình_Table_chủ_đề">
+          <End Role="Table_chủ_đề" Type="Self.Table_chủ_đề" Multiplicity="0..1" />
+          <End Role="Table_mô_hình" Type="Self.Table_mô_hình" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_chủ_đề">
+              <PropertyRef Name="Mã_chủ_đề" />
+            </Principal>
+            <Dependent Role="Table_mô_hình">
+              <PropertyRef Name="Mã_chủ_đề" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_đơn_đặt_hàng_Table_khách_hàng">
+          <End Role="Table_khách_hàng" Type="Self.Table_khách_hàng" Multiplicity="0..1" />
+          <End Role="Table_đơn_đặt_hàng" Type="Self.Table_đơn_đặt_hàng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_khách_hàng">
+              <PropertyRef Name="Mã_khách_hàng" />
+            </Principal>
+            <Dependent Role="Table_đơn_đặt_hàng">
+              <PropertyRef Name="Mã_khách_hàng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_kiểm_soát_đặt_hàng_Table_đơn_đặt_hàng">
+          <End Role="Table_đơn_đặt_hàng" Type="Self.Table_đơn_đặt_hàng" Multiplicity="1" />
+          <End Role="Table_kiểm_soát_đặt_hàng" Type="Self.Table_kiểm_soát_đặt_hàng" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Table_đơn_đặt_hàng">
+              <PropertyRef Name="Mã_đơn_hàng" />
+            </Principal>
+            <Dependent Role="Table_kiểm_soát_đặt_hàng">
+              <PropertyRef Name="Mã_đơn_hàng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_kiểm_soát_đặt_hàng_Table_mô_hình">
+          <End Role="Table_mô_hình" Type="Self.Table_mô_hình" Multiplicity="0..1" />
+          <End Role="Table_kiểm_soát_đặt_hàng" Type="Self.Table_kiểm_soát_đặt_hàng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_mô_hình">
+              <PropertyRef Name="Mã_mô_hình" />
+            </Principal>
+            <Dependent Role="Table_kiểm_soát_đặt_hàng">
+              <PropertyRef Name="Mã_mô_hình" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_mô_hình_Table_nhà_sản_xuất">
+          <End Role="Table_nhà_sản_xuất" Type="Self.Table_nhà_sản_xuất" Multiplicity="0..1" />
+          <End Role="Table_mô_hình" Type="Self.Table_mô_hình" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table_nhà_sản_xuất">
+              <PropertyRef Name="Mã_nhà_sản_xuất" />
+            </Principal>
+            <Dependent Role="Table_mô_hình">
+              <PropertyRef Name="Mã_nhà_sản_xuất" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database_web_mô_hìnhEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Table_chủ_đề" EntityType="Self.Table_chủ_đề" />
+          <EntitySet Name="Table_đơn_đặt_hàng" EntityType="Self.Table_đơn_đặt_hàng" />
+          <EntitySet Name="Table_khách_hàng" EntityType="Self.Table_khách_hàng" />
+          <EntitySet Name="Table_mô_hình" EntityType="Self.Table_mô_hình" />
+          <EntitySet Name="Table_nhà_sản_xuất" EntityType="Self.Table_nhà_sản_xuất" />
+          <EntitySet Name="Table_kiểm_soát_đặt_hàng" EntityType="Self.Table_kiểm_soát_đặt_hàng" />
+          <AssociationSet Name="FK_Table_chủ_đề_Table_chủ_đề" Association="Self.FK_Table_chủ_đề_Table_chủ_đề">
+            <End Role="Table_chủ_đề" EntitySet="Table_chủ_đề" />
+            <End Role="Table_chủ_đề1" EntitySet="Table_chủ_đề" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_mô_hình_Table_chủ_đề" Association="Self.FK_Table_mô_hình_Table_chủ_đề">
+            <End Role="Table_chủ_đề" EntitySet="Table_chủ_đề" />
+            <End Role="Table_mô_hình" EntitySet="Table_mô_hình" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_đơn_đặt_hàng_Table_khách_hàng" Association="Self.FK_Table_đơn_đặt_hàng_Table_khách_hàng">
+            <End Role="Table_khách_hàng" EntitySet="Table_khách_hàng" />
+            <End Role="Table_đơn_đặt_hàng" EntitySet="Table_đơn_đặt_hàng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_kiểm_soát_đặt_hàng_Table_đơn_đặt_hàng" Association="Self.FK_Table_kiểm_soát_đặt_hàng_Table_đơn_đặt_hàng">
+            <End Role="Table_đơn_đặt_hàng" EntitySet="Table_đơn_đặt_hàng" />
+            <End Role="Table_kiểm_soát_đặt_hàng" EntitySet="Table_kiểm_soát_đặt_hàng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_kiểm_soát_đặt_hàng_Table_mô_hình" Association="Self.FK_Table_kiểm_soát_đặt_hàng_Table_mô_hình">
+            <End Role="Table_mô_hình" EntitySet="Table_mô_hình" />
+            <End Role="Table_kiểm_soát_đặt_hàng" EntitySet="Table_kiểm_soát_đặt_hàng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_mô_hình_Table_nhà_sản_xuất" Association="Self.FK_Table_mô_hình_Table_nhà_sản_xuất">
+            <End Role="Table_nhà_sản_xuất" EntitySet="Table_nhà_sản_xuất" />
+            <End Role="Table_mô_hình" EntitySet="Table_mô_hình" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="Database_web_mô_hìnhEntities">
+          <EntitySetMapping Name="Table_chủ_đề">
+            <EntityTypeMapping TypeName="DatabaseModel.Table_chủ_đề">
+              <MappingFragment StoreEntitySet="Table chủ đề">
+                <ScalarProperty Name="Mã_chủ_đề" ColumnName="Mã chủ đề" />
+                <ScalarProperty Name="Tên_chủ_đề__tên_phim_____" ColumnName="Tên chủ đề (tên phim,...)" />
+                <ScalarProperty Name="Bộ_sưu_tập" ColumnName="Bộ sưu tập" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_đơn_đặt_hàng">
+            <EntityTypeMapping TypeName="DatabaseModel.Table_đơn_đặt_hàng">
+              <MappingFragment StoreEntitySet="Table đơn đặt hàng">
+                <ScalarProperty Name="Mã_đơn_hàng" ColumnName="Mã đơn hàng" />
+                <ScalarProperty Name="Mã_khách_hàng" ColumnName="Mã khách hàng" />
+                <ScalarProperty Name="Ngày_đặt_hàng" ColumnName="Ngày đặt hàng" />
+                <ScalarProperty Name="Trị_giá" ColumnName="Trị giá" />
+                <ScalarProperty Name="Đã_giao" ColumnName="Đã giao" />
+                <ScalarProperty Name="Ngày_giao_hàng" ColumnName="Ngày giao hàng" />
+                <ScalarProperty Name="Tên_người_nhận" ColumnName="Tên người nhận" />
+                <ScalarProperty Name="Địa_chỉ_nhận" ColumnName="Địa chỉ nhận" />
+                <ScalarProperty Name="Sđt_nhận" ColumnName="Sđt nhận" />
+                <ScalarProperty Name="Hình_thức_thanh_toán" ColumnName="Hình thức thanh toán" />
+                <ScalarProperty Name="Hình_thức_giao_hàng" ColumnName="Hình thức giao hàng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_khách_hàng">
+            <EntityTypeMapping TypeName="DatabaseModel.Table_khách_hàng">
+              <MappingFragment StoreEntitySet="Table khách hàng">
+                <ScalarProperty Name="Mã_khách_hàng" ColumnName="Mã khách hàng" />
+                <ScalarProperty Name="Tên_khách_hàng" ColumnName="Tên khách hàng" />
+                <ScalarProperty Name="Địa_chỉ_khách_hàng" ColumnName="Địa chỉ khách hàng" />
+                <ScalarProperty Name="Điện_thoại_khách_hàng" ColumnName="Điện thoại khách hàng" />
+                <ScalarProperty Name="Tên_đăng_nhập" ColumnName="Tên đăng nhập" />
+                <ScalarProperty Name="Mật_khẩu" ColumnName="Mật khẩu" />
+                <ScalarProperty Name="Ngày_sinh" ColumnName="Ngày sinh" />
+                <ScalarProperty Name="Giới_tính" ColumnName="Giới tính" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Đã_duyệt" ColumnName="Đã duyệt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_mô_hình">
+            <EntityTypeMapping TypeName="DatabaseModel.Table_mô_hình">
+              <MappingFragment StoreEntitySet="Table mô hình">
+                <ScalarProperty Name="Mã_mô_hình" ColumnName="Mã mô hình" />
+                <ScalarProperty Name="Tên_mô_hình" ColumnName="Tên mô hình" />
+                <ScalarProperty Name="Đơn_vị_tính" ColumnName="Đơn vị tính" />
+                <ScalarProperty Name="Đơn_giá" ColumnName="Đơn giá" />
+                <ScalarProperty Name="Hình_minh_họa" ColumnName="Hình minh họa" />
+                <ScalarProperty Name="Mô_tả" ColumnName="Mô tả" />
+                <ScalarProperty Name="Mã_chủ_đề" ColumnName="Mã chủ đề" />
+                <ScalarProperty Name="Mã_nhà_sản_xuất" ColumnName="Mã nhà sản xuất" />
+                <ScalarProperty Name="Ngày_cập_nhật" ColumnName="Ngày cập nhật" />
+                <ScalarProperty Name="Số_lượng_bán" ColumnName="Số lượng bán" />
+                <ScalarProperty Name="Số_lượt_xem" ColumnName="Số lượt xem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_nhà_sản_xuất">
+            <EntityTypeMapping TypeName="DatabaseModel.Table_nhà_sản_xuất">
+              <MappingFragment StoreEntitySet="Table nhà sản xuất">
+                <ScalarProperty Name="Mã_nhà_sản_xuất" ColumnName="Mã nhà sản xuất" />
+                <ScalarProperty Name="Tên_nhà_sản_xuất" ColumnName="Tên nhà sản xuất" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_kiểm_soát_đặt_hàng">
+            <EntityTypeMapping TypeName="DatabaseModel.Table_kiểm_soát_đặt_hàng">
+              <MappingFragment StoreEntitySet="Table kiểm soát đặt hàng">
+                <ScalarProperty Name="Mã_đơn_hàng" ColumnName="Mã đơn hàng" />
+                <ScalarProperty Name="Mã_mô_hình" ColumnName="Mã mô hình" />
+                <ScalarProperty Name="Số_lượng" ColumnName="Số lượng" />
+                <ScalarProperty Name="Đơn_giá" ColumnName="Đơn giá" />
+                <ScalarProperty Name="Thành_tiền" ColumnName="Thành tiền" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

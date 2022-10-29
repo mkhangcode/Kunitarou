@@ -56,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -131,6 +133,39 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatabaseEntites.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseEntites.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseEntites.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseEntites.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseEntites.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table_chủ_đề.cs">
+      <DependentUpon>DatabaseEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table_khách_hàng.cs">
+      <DependentUpon>DatabaseEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table_kiểm_soát_đặt_hàng.cs">
+      <DependentUpon>DatabaseEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table_mô_hình.cs">
+      <DependentUpon>DatabaseEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table_nhà_sản_xuất.cs">
+      <DependentUpon>DatabaseEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table_đơn_đặt_hàng.cs">
+      <DependentUpon>DatabaseEntites.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,8 +182,25 @@
     <Content Include="ImagesJUJUTSU\gojo1.jpg" />
     <Content Include="ImagesONEPIECE\luffy1.jpg" />
     <Content Include="Logo\facebook_cover_photo_1-removebg-preview.png" />
+    <Content Include="Models\DatabaseEntites.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseEntites.edmx</DependentUpon>
+      <LastGenOutput>DatabaseEntites.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DatabaseEntites.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseEntites.edmx</DependentUpon>
+      <LastGenOutput>DatabaseEntites.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\DatabaseEntites.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseEntites.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DatabaseEntites.edmx.diagram">
+      <DependentUpon>DatabaseEntites.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -183,7 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -197,6 +248,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
